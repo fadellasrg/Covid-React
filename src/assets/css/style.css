@@ -1,0 +1,15 @@
+/* .container{
+    color: blue;
+    background-image: url('../img/bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+*{
+    font-family: 'PT Sans', sans-serif;
+}
+tr th{
+    color: rgb(22, 120, 145);
+    font-size: 22px;
+}
