@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { GET_ALL_COUNTRIES } from './action'
+
+import { useEffect } from 'react'
 import styles from './style.module.css'
 // import Detail from '../component/Detail'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
-    const [summary, setSummary] = useState([])
+  const dataBasic = useSelector((state) => state.basic)
+
+    const dispatch = useDispatch()
+    // const [summary, setSummary] = useState([])
 
     useEffect(() => {
-        axios.get('https://api.covid19api.com/summary').then((response)=>{
-            setSummary(response.data.Countries)
-        }).catch((err)=>{
-            console.log(err)
-        })
+        dispatch(GET_ALL_COUNTRIES())
     }, [])
 
     return(
@@ -31,7 +32,7 @@ const Home = () => {
               </thead>
               <tbody>
               {
-                summary.map((item, i) => (
+                dataBasic.list.map((item, i) => (
                   <tr key={i}>
                     <td>{item.Country}</td>
                     <td>{item.TotalConfirmed.toLocaleString('en').split(',').join('.')}</td>
@@ -39,7 +40,6 @@ const Home = () => {
                     <td>{item.TotalRecovered.toLocaleString('en').split(',').join('.')}</td>
                     <td>{item.Date.slice(0,10).split('-').reverse().join('-')}</td>
                     <td>
-                      {/* <button onClick={detail(item.Slug)} id="btn-detail" type="button" className="btn">Detail */}
                       <Link to={`/detail/${item.Slug}`} className="nav-link"><button id={styles.btnDetail} className="btn">Detail</button></Link>
                     </td>
                   </tr>

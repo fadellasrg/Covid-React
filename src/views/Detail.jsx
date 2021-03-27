@@ -7,7 +7,7 @@ const Detail = () => {
     const [dataDetail, setDetail] = useState([])
 
     useEffect(() => {
-        axios.get(`https://api.covid19api.com/live/country/${params.Slug}/status/confirmed`).then((response) => {
+        axios.get(`${process.env.REACT_APP_URL}/live/country/${params.Slug}/status/confirmed`).then((response) => {
         const data = response.data.reverse()
         setDetail(data)
       }).catch((err) => {
